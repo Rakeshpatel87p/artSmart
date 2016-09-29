@@ -29,7 +29,7 @@ angular.module('momentumArtApp', [])
 
 // Returns link by resolving promise before passing in
 .factory('getBackgroundImage', ['$http', function($http) {
-    var user = 'hello8';
+    var user = 'testUser';
     var getBackgroundImage = {
         getImage: function() {
             var promise = $http.get(user + '/paintingsToDisplay').then(function(response) {
