@@ -4,7 +4,8 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     http = require('http'),
-    unirest = require('unirest')
+    unirest = require('unirest'),
+    db;
 
 app.use(bodyParser.json());
 // This bad boi lets us parse req.body stuff!!
@@ -13,10 +14,18 @@ app.use(express.static('public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use('/server.js', express.static(__dirname + '/server.js'));
 
-mongoose.connect('mongodb://localhost/momentum_artWork');
-
-mongoose.connection.on('error', function(err) {
-    console.error('Could not connect. Error', err)
+// mongoose.connect('mongodb://localhost/momentum_artWork');
+mongoose.connect(process.env.MONGOLAB_URI, function(err, database) {
+    if (err) {
+        console.log('Error connecting to database ', err)
+        process.exit(1)
+    }
+    db = database
+    var server = app.listen(process.env.PORT || 8080, function() {
+        var port = server.address().port;
+        console.log('Connected Captain. Safe journey.');
+        console.log('App now running on port', port)
+    });
 });
 
 var userProfile = mongoose.Schema({
@@ -56,10 +65,10 @@ app.post('/newUser', function(req, response) {
             return response.status(500).json(err)
         }
         // PaintingAttributes.find({ special_notes: "starter_kit" })
-            // .populate('PaintingAttributes')
-            // .exec (function(err, newEntry){
-            //     console.log(newEntry)
-            // })
+        // .populate('PaintingAttributes')
+        // .exec (function(err, newEntry){
+        //     console.log(newEntry)
+        // })
         PaintingAttributes.find({ special_notes: "starter_kit" }, function(err, starter_kit) {
             if (err) {
                 return response.status(500).json(err)
@@ -123,24 +132,24 @@ app.get('/:user/paintingsToDisplay', function(req, response) {
             return response.status(500).json(err)
         }
         response.status(201).json(user.artWorksOnRotation)
-        // if (user.dateRotationWasUpdate !== getDate()) {
-        //     console.log('Getting new paintings for the day')
-        //         // Make Call and Update Array
-        //     unirest.post('https://api.artsy.net/api/tokens/xapp_token')
-        //         .headers({ 'Accept': 'application/json' })
-        //         .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
-        //         .end(function(res) {
-        //             // What additional artworks will I provide?
-        //             unirest.get('https://api.artsy.net/api/artworks/' + id)
-        //                 .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
-        //                 .end(function(res_) {
-        //                     console.log(res_.body)
-        //                     response.json(res_.body)
-        //                 })
-        //         });
-        //     // Update date of user.dateRotationWasUpdated
-        // } else {
-        //     response.status(201).json(user.artWorksOnRotation);
+            // if (user.dateRotationWasUpdate !== getDate()) {
+            //     console.log('Getting new paintings for the day')
+            //         // Make Call and Update Array
+            //     unirest.post('https://api.artsy.net/api/tokens/xapp_token')
+            //         .headers({ 'Accept': 'application/json' })
+            //         .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
+            //         .end(function(res) {
+            //             // What additional artworks will I provide?
+            //             unirest.get('https://api.artsy.net/api/artworks/' + id)
+            //                 .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
+            //                 .end(function(res_) {
+            //                     console.log(res_.body)
+            //                     response.json(res_.body)
+            //                 })
+            //         });
+            //     // Update date of user.dateRotationWasUpdated
+            // } else {
+            //     response.status(201).json(user.artWorksOnRotation);
 
         // }
     })
@@ -154,6 +163,5 @@ var getDate = function() {
     return newdate = year + "/" + month + "/" + day;
 }
 
-app.listen(process.env.PORT || 8080);
-console.log('Connected Captain. Safe journey.');
+// app.listen(process.env.PORT || 8080);
 exports.app = app;
