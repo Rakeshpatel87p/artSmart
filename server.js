@@ -15,7 +15,7 @@ app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use('/server.js', express.static(__dirname + '/server.js'));
 
 // 
-mongoose.connect(process.env.MONGOLAB_URI, function(err, database) {
+mongoose.connect('mongodb://Rakeshpatel87p:printer1@ds023644.mlab.com:23644/art_smart', function(err, database) {
     if (err) {
         console.log('Error connecting to database ', err)
         process.exit(1)
