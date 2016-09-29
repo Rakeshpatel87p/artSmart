@@ -1,0 +1,40 @@
+body {
+    color: white;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+/*    background-position: center center;*/
+    background-size: cover;
+}
+
+/*.container {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /*    background-position: center center;
+*/
+    /*background-size: cover;*/
+
+.content {
+    margin-top: 25%;
+    text-align: center;
+}
+
+.time,
+.greeting {
+    font-family: 'Arimo', sans-serif;
+}
+
+.time {
+    font-size: 181px;
+    margin-bottom: -2%;
+    font-weight: 500;
+}
+
+.greeting {
+    font-size: 38px;
+}
+
+@media screen and (min-width: 750px) {
+    .content {
+        margin-top: 25%;
+    }
+}
