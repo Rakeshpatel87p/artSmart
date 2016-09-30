@@ -1,0 +1,37 @@
+{
+  "name": "angular-http-service",
+  "description": "An angular.js service for handling http/s requests.",
+  "main": "src/angular-http-service.js",
+  "authors": [
+    "David Poxon <dpoxon@imagus.com.au> (http://www.davidpoxon.com)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "http",
+    "service"
+  ],
+  "homepage": "https://github.com/imagus/angular-http-service",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8"
+  },
+  "version": "1.2.6",
+  "_release": "1.2.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.6",
+    "commit": "a92f54caa8baf0b26e8de638f80592a1eaee8523"
+  },
+  "_source": "https://github.com/imagus/angular-http-service.git",
+  "_target": "^1.2.6",
+  "_originalSource": "angular-http-service",
+  "_direct": true
+}

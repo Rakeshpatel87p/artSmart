@@ -1,0 +1,42 @@
+{
+  "name": "angular-http-service",
+  "version": "1.2.6",
+  "description": "An angular.js service for handling http/s requests.",
+  "main": "angular-http-service.min.js",
+  "dependencies": {
+    "angular": "^1.4.8"
+  },
+  "devDependencies": {
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-ng-annotate": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "angular-http-service.js",
+    "angular-http-service.min.js",
+    "angular-http-service.min.js.map"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imagus/angular-http-service.git"
+  },
+  "keywords": [
+    "angular",
+    "http",
+    "service"
+  ],
+  "author": "David Poxon <dpoxon@imagus.com.au> (http://www.davidpoxon.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imagus/angular-http-service/issues"
+  },
+  "homepage": "https://github.com/imagus/angular-http-service"
+}
