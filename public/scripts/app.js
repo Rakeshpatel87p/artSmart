@@ -1,21 +1,13 @@
 angular.module('momentumArtApp', [])
-    .controller('backgroundImage', ['$scope', '$interval', 'getBackgroundImage', function($scope, $interval, getBackgroundImage) {
-        var updatedClockAndGreeting = function() {
-            $scope.time = Date.now();
-            var d = new Date();
-            var h = d.getHours();
-            if (h <= 11) {
-                $scope.greeting = 'Morning Sunshine'
-            } else if (h > 11 && h <= 16) {
-                $scope.greeting = 'Afternoon Cutie'
-            } else if (h > 16 && h <= 20) {
-                $scope.greeting = 'Evening Greeting'
-            } else if (h > 20 && h <= 24) {
-                $scope.greeting = 'Happy Night'
-            }
-        }
-        updatedClockAndGreeting();
-        $interval(updatedClockAndGreeting, 1000);
+    .controller('backgroundImage', ['$scope', '$timeout', '$interval', 'getBackgroundImage', function($scope, $timeout, $interval, getBackgroundImage) {
+        $scope.paintingBlurb = false;
+        paintingBlurbTimer();
+
+        function paintingBlurbTimer() {
+            $scope.paintingBlurb = true;
+            $timeout(function() { $scope.paintingBlurb = false; console.log('inside function', $scope.paintingBlurb) }, 3000)
+        };
+
         getBackgroundImage.getImage().then(function successCallbackFn(data) {
             var randomNumber = getRandomNumber(0, 5)
             $scope.backgroundImageUrl = data[randomNumber].url;

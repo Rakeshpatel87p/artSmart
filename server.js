@@ -49,9 +49,9 @@ var UserProfile = mongoose.model('UserProfile', userProfile);
 var PaintingAttributes = mongoose.model('PaintingAttributes', paintingAttributes)
 
 // Why doesn't this work?
-app.get('/', function(req, response) {
-    response.json({ text: "Hello world" });
-});
+// app.get('/', function(req, response) {
+//     response.json({ text: "Hello world" });
+// });
 
 // Creates New User Profile, adding start-kit artworks
 app.post('/newUser', function(req, response) {
