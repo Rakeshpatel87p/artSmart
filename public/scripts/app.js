@@ -1,6 +1,5 @@
 angular.module('momentumArtApp', [])
     .controller('backgroundImage', ['$scope', '$interval', 'getBackgroundImage', function($scope, $interval, getBackgroundImage) {
-        // Ugly here - find new spot
         var updatedClockAndGreeting = function() {
             $scope.time = Date.now();
             var d = new Date();
@@ -17,9 +16,7 @@ angular.module('momentumArtApp', [])
         }
         updatedClockAndGreeting();
         $interval(updatedClockAndGreeting, 1000);
-        // $scope.userName = 'hello8';
         getBackgroundImage.getImage().then(function successCallbackFn(data) {
-            console.log('this is the data', data)
             var randomNumber = getRandomNumber(0, 5)
             $scope.backgroundImageUrl = data[randomNumber].url;
             $scope.paintingName = data[randomNumber].title;
@@ -30,7 +27,6 @@ angular.module('momentumArtApp', [])
         })
     }])
 
-// Returns link by resolving promise before passing in
 .factory('getBackgroundImage', ['$http', function($http) {
     var user = 'testUser3';
     var getBackgroundImage = {
