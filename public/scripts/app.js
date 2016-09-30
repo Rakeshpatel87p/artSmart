@@ -21,7 +21,10 @@ angular.module('momentumArtApp', [])
         getBackgroundImage.getImage().then(function successCallbackFn(data) {
             console.log('this is the data', data)
             var randomNumber = getRandomNumber(0, 5)
-            $scope.backgroundImageUrl = data[randomNumber];
+            $scope.backgroundImageUrl = data[randomNumber].url;
+            $scope.paintingName = data[randomNumber].title;
+            $scope.artistName = data[randomNumber].artist;
+            $scope.yearPainted = data[randomNumber].date;
         }, function errorCallbackFn(response) {
             console.log(response)
         })
@@ -29,7 +32,7 @@ angular.module('momentumArtApp', [])
 
 // Returns link by resolving promise before passing in
 .factory('getBackgroundImage', ['$http', function($http) {
-    var user = 'testUser';
+    var user = 'testUser3';
     var getBackgroundImage = {
         getImage: function() {
             var promise = $http.get(user + '/paintingsToDisplay').then(function(response) {
@@ -38,7 +41,6 @@ angular.module('momentumArtApp', [])
             return promise
         }
     }
-    console.log('here is the bckgrd image', getBackgroundImage);
     return getBackgroundImage
 }])
 

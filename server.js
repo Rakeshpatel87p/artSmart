@@ -71,12 +71,13 @@ app.post('/newUser', function(req, response) {
             if (err) {
                 return response.status(500).json(err)
             }
+            console.log('this is the starter_kit', starter_kit)
             urls = starter_kit.map(function(obj) {
                 //TODO - homework: map functions in javscript - functional programming
                 return obj.url;
             })
             console.log('this is the urls mapped. take a look------', urls);
-            UserProfile.update({ _id: newUser._id }, { artWorksOnRotation: urls }, function(err, updatedUser) {
+            UserProfile.update({ _id: newUser._id }, { artWorksOnRotation: starter_kit }, function(err, updatedUser) {
                 if (err) {
                     console.log(err, 'error');
                 }
