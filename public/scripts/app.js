@@ -38,6 +38,7 @@ angular.module('momentumArtApp', [])
             return promise
         }
     }
+    console.log('here is the bckgrd image', getBackgroundImage);
     return getBackgroundImage
 }])
 

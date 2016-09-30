@@ -1,21 +1,32 @@
-body {
+
+html {
+    background-color:black;
+}
+/*body {
     color: white;
     background-repeat: no-repeat;
     background-attachment: fixed;
-/*    background-position: center center;*/
     background-size: cover;
+}*/
+
+.paintingImage {
+    margin-left:25%;
+    margin-top:8%;
+    padding-bottom: 2%;
 }
 
-/*.container {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /*    background-position: center center;
-*/
-    /*background-size: cover;*/
-
-.content {
-    margin-top: 25%;
+.paintingImage img {
+    border: 1px solid grey;
+}
+.paintingDetails {
+    width:25%;
+    margin-left:38%;
+    border-top:1px solid white;
     text-align: center;
+    color:white;
+    line-height:3px;
+    font-family: 'Josefin Sans', sans-serif;
+
 }
 
 .time,
