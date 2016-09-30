@@ -40,10 +40,9 @@ var paintingAttributes = mongoose.Schema({
     image_id: { type: String },
     title: { type: String },
     date: { type: String },
+    artist: {type: String},
     collecting_institution: { type: String },
     url: { type: String },
-    image_version_to_use: { type: String },
-    // Added this. May need to "reset" starter kit
     special_notes: { type: String }
 });
 
@@ -95,9 +94,10 @@ app.post('/addingArt', function(req, response) {
         image_id: req.body.image_id,
         title: req.body.title,
         date: req.body.date,
+        artist: req.body.artist,
         collecting_institution: req.body.institution,
         url: req.body.url,
-        image_version_to_use: req.body.version
+        special_notes: req.body.special_notes
 
     });
     newItem.save(function(err, newPaintingAdded) {

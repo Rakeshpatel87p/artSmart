@@ -1,4 +1,4 @@
-Art work for the masses.
+Art work for all.
 
 Helping folks discover their tastes by curating paintings for them. 
 
@@ -6,4 +6,4 @@ Users will be able to thumbs up or down a painting. Friends at Artsy.net will re
 
 Artwork is still a work in progress, but you can see the first installment of this vision.
 
-I use a MEAN stack. 
+MEAN stack used. 
