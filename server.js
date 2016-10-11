@@ -20,7 +20,7 @@ mongoose.connect('mongodb://Rakeshpatel87p:printer1@ds023644.mlab.com:23644/art_
         process.exit(1)
     }
     db = database
-    var server = app.listen(process.env.PORT || 8080, function() {
+    var server = app.listen(process.env.PORT || 8000, function() {
         var port = server.address().port;
         console.log('Connected Captain. Safe journey.');
         console.log('App now running on port', port)
@@ -39,7 +39,7 @@ var paintingAttributes = mongoose.Schema({
     image_id: { type: String },
     title: { type: String },
     date: { type: String },
-    artist: {type: String},
+    artist: { type: String },
     collecting_institution: { type: String },
     url: { type: String },
     special_notes: { type: String }
@@ -71,12 +71,10 @@ app.post('/newUser', function(req, response) {
             if (err) {
                 return response.status(500).json(err)
             }
-            console.log('this is the starter_kit', starter_kit)
             urls = starter_kit.map(function(obj) {
                 //TODO - homework: map functions in javscript - functional programming
                 return obj.url;
             })
-            console.log('this is the urls mapped. take a look------', urls);
             UserProfile.update({ _id: newUser._id }, { artWorksOnRotation: starter_kit }, function(err, updatedUser) {
                 if (err) {
                     console.log(err, 'error');
@@ -132,8 +130,49 @@ app.get('/:user/paintingsToDisplay', function(req, response) {
             return response.status(500).json(err)
         }
         response.status(201).json(user.artWorksOnRotation)
-            // if (user.dateRotationWasUpdate !== getDate()) {
-            //     console.log('Getting new paintings for the day')
+        if (user.dateRotationWasUpdate !== getDate()) {
+            console.log('Need new paintings for the day')
+                for (var i = 0; i < user.artWorksOnRotation.length; i++){
+                    if (user.artWorksOnRotation[i].liked == true) {
+                        unirest.post('https://api.artsy.net/api/tokens/xapp_token')
+                            .headers({ 'Accept': 'application/json' })
+                            .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
+                            .end(function(res) {
+                                unirest.get('https://api.artsy.net/api/artworks?similar_to_artwork_id=' + user.artWorksOnRotation[i].image_id)
+                                .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
+                                .end(function(res_) {
+                                console.log(res_.body)
+                                response.json(res_.body)
+                            })
+
+                            })
+                    }
+                }
+                
+                }
+                // user.artWorksOnRotation = [];
+                // Check lenght of array.
+                // If less than 5, then make additional API calls to sample=1
+            unirest.post('https://api.artsy.net/api/tokens/xapp_token')
+                .headers({ 'Accept': 'application/json' })
+                .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
+                .end(function(res) {
+                    // What additional artworks will I provide?
+                    for (var i = 0; i = user.artWorksOnRotation.length; i++) {
+                        unirest.get('https://api.artsy.net/api/artworks/' + id)
+                            .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
+                            .end(function(res_) {
+                                console.log(res_.body)
+                                response.json(res_.body)
+                            })
+                    }
+
+                });
+            // Update date of user.dateRotationWasUpdated
+        } else {
+            response.status(201).json(user.artWorksOnRotation)
+
+
             //         // Make Call and Update Array
             //     unirest.post('https://api.artsy.net/api/tokens/xapp_token')
             //         .headers({ 'Accept': 'application/json' })
@@ -151,8 +190,9 @@ app.get('/:user/paintingsToDisplay', function(req, response) {
             // } else {
             //     response.status(201).json(user.artWorksOnRotation);
 
-        // }
-    })
+        }
+    });
+
 });
 
 var getDate = function() {
