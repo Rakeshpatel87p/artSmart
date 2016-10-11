@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./style/main.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300" rel="stylesheet">
+    <script src="https://use.fontawesome.com/0ddfe574a6.js"></script>
     <title>Momentum Art</title>
 </head>
 
@@ -15,8 +16,9 @@
             <img src={{backgroundImageUrl}} alt="">
         </div>
         <div class="userInput">
-            
-        </div>
+            <i class="fa fa-thumbs-up" aria-hidden="true" ng-click="userLikes()"></i>
+<!--             <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+ -->        </div>
         <div ng-show="paintingBlurb" class="paintingDetails fadein fadeout">
             <p class="paintingName">{{paintingName}}</p>
             <p class="artistName">{{artistName}}</p>

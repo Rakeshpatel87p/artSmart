@@ -130,67 +130,48 @@ app.get('/:user/paintingsToDisplay', function(req, response) {
             return response.status(500).json(err)
         }
         response.status(201).json(user.artWorksOnRotation)
-        if (user.dateRotationWasUpdate !== getDate()) {
-            console.log('Need new paintings for the day')
-                for (var i = 0; i < user.artWorksOnRotation.length; i++){
-                    if (user.artWorksOnRotation[i].liked == true) {
-                        unirest.post('https://api.artsy.net/api/tokens/xapp_token')
-                            .headers({ 'Accept': 'application/json' })
-                            .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
-                            .end(function(res) {
-                                unirest.get('https://api.artsy.net/api/artworks?similar_to_artwork_id=' + user.artWorksOnRotation[i].image_id)
-                                .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
-                                .end(function(res_) {
-                                console.log(res_.body)
-                                response.json(res_.body)
-                            })
+        // if (user.dateRotationWasUpdate !== getDate()) {
+        //     console.log('Need new paintings for the day')
+        //         for (var i = 0; i < user.artWorksOnRotation.length; i++){
+        //             if (user.artWorksOnRotation[i].liked == true) {
+        //                 unirest.post('https://api.artsy.net/api/tokens/xapp_token')
+        //                     .headers({ 'Accept': 'application/json' })
+        //                     .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
+        //                     .end(function(res) {
+        //                         unirest.get('https://api.artsy.net/api/artworks?similar_to_artwork_id=' + user.artWorksOnRotation[i].image_id)
+        //                         .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
+        //                         .end(function(res_) {
+        //                         console.log(res_.body)
+        //                         response.json(res_.body)
+        //                     })
 
-                            })
-                    }
-                }
-                
-                }
-                // user.artWorksOnRotation = [];
-                // Check lenght of array.
-                // If less than 5, then make additional API calls to sample=1
-            unirest.post('https://api.artsy.net/api/tokens/xapp_token')
-                .headers({ 'Accept': 'application/json' })
-                .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
-                .end(function(res) {
-                    // What additional artworks will I provide?
-                    for (var i = 0; i = user.artWorksOnRotation.length; i++) {
-                        unirest.get('https://api.artsy.net/api/artworks/' + id)
-                            .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
-                            .end(function(res_) {
-                                console.log(res_.body)
-                                response.json(res_.body)
-                            })
-                    }
+        //                     })
+        //             }
+        //         }
 
-                });
-            // Update date of user.dateRotationWasUpdated
-        } else {
-            response.status(201).json(user.artWorksOnRotation)
+        //         }
+        //         // user.artWorksOnRotation = [];
+        //         // Check lenght of array.
+        //         // If less than 5, then make additional API calls to sample=1
+        //     unirest.post('https://api.artsy.net/api/tokens/xapp_token')
+        //         .headers({ 'Accept': 'application/json' })
+        //         .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
+        //         .end(function(res) {
+        //             // What additional artworks will I provide?
+        //             for (var i = 0; i = user.artWorksOnRotation.length; i++) {
+        //                 unirest.get('https://api.artsy.net/api/artworks/' + id)
+        //                     .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
+        //                     .end(function(res_) {
+        //                         console.log(res_.body)
+        //                         response.json(res_.body)
+        //                     })
+        //             }
 
-
-            //         // Make Call and Update Array
-            //     unirest.post('https://api.artsy.net/api/tokens/xapp_token')
-            //         .headers({ 'Accept': 'application/json' })
-            //         .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
-            //         .end(function(res) {
-            //             // What additional artworks will I provide?
-            //             unirest.get('https://api.artsy.net/api/artworks/' + id)
-            //                 .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
-            //                 .end(function(res_) {
-            //                     console.log(res_.body)
-            //                     response.json(res_.body)
-            //                 })
-            //         });
-            //     // Update date of user.dateRotationWasUpdated
-            // } else {
-            //     response.status(201).json(user.artWorksOnRotation);
-
-        }
+        //         });
+        //     // Update date of user.dateRotationWasUpdated
+        // } else {
+        //     response.status(201).json(user.artWorksOnRotation)
+        // }
     });
 
 });
