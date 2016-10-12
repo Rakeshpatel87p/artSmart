@@ -17,6 +17,10 @@ angular.module('momentumArtApp', [])
         }, function errorCallbackFn(response) {
             console.log(response)
         })
+
+        $scope.userLikes = function(){
+            
+        }
     }])
 
 .factory('getBackgroundImage', ['$http', function($http) {
