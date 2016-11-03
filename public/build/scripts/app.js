@@ -5,7 +5,7 @@ angular.module('momentumArtApp', [])
 
         function paintingBlurbTimer() {
             $scope.paintingBlurb = true;
-            $timeout(function() { $scope.paintingBlurb = false; console.log('inside function', $scope.paintingBlurb) }, 3000)
+            $timeout(function() { $scope.paintingBlurb = false }, 3000)
         };
 
         getBackgroundImage.getImage().then(function successCallbackFn(data) {
@@ -15,26 +15,27 @@ angular.module('momentumArtApp', [])
             $scope.artistName = data[randomNumber].artist;
             $scope.yearPainted = data[randomNumber].date;
         }, function errorCallbackFn(response) {
-            console.log(response)
-        })
+            console.log('this is the error message', response)
+        });
 
-        $scope.userLikes = function(){
-            
-        }
     }])
+
 
 .factory('getBackgroundImage', ['$http', function($http) {
     var user = 'testUser3';
+    // Chrome extension WORKS by going to heroku here
+    var herokuURL = "https://damp-springs-37879.herokuapp.com/";
     var getBackgroundImage = {
         getImage: function() {
-            var promise = $http.get(user + '/paintingsToDisplay').then(function(response) {
+            var promise = $http.get(herokuURL + user + '/paintingsToDisplay').then(function(response) {
                 return response.data
             });
             return promise
         }
     }
     return getBackgroundImage
-}])
+
+}]);
 
 var getRandomNumber = function(min, max) {
     return Math.floor(Math.random() * (max - min) + min);

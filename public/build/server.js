@@ -8,22 +8,23 @@ var express = require('express'),
     db;
 
 app.use(bodyParser.json());
-// This bad boi lets us parse req.body stuff!!
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static('public'));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
-app.use('/server.js', express.static(__dirname + '/server.js'));
+app.use(express.static(__dirname));
+// Needed?
+// app.use('/lib', express.static(__dirname + '/bower_components'));
+// app.use('/server.js', express.static(__dirname + '/server.js'));
 
 mongoose.connect('mongodb://Rakeshpatel87p:printer1@ds023644.mlab.com:23644/art_smart', function(err, database) {
     if (err) {
         console.log('Error connecting to database ', err)
         process.exit(1)
     }
+    console.log('connected!')
     db = database
-    var server = app.listen(process.env.PORT || 8080, function() {
+    var server = app.listen(process.env.PORT || 8000, function() {
         var port = server.address().port;
         console.log('Connected Captain. Safe journey.');
-        console.log('App now running on port', port)
+        console.log('App now running on port', port);
     });
 });
 
@@ -124,13 +125,15 @@ app.get('/artworks/:id', function(req, response) {
                 })
         });
 });
-// Almost there! Produces the background image for client
+
 app.get('/:user/paintingsToDisplay', function(req, response) {
     var user = req.params.user
     UserProfile.findOne({ user: user }, function(err, user) {
         if (err) {
             return response.status(500).json(err)
         }
+        console.log('here');
+        console.log('returning response', user)
         response.status(201).json(user.artWorksOnRotation)
             // if (user.dateRotationWasUpdate !== getDate()) {
             //     console.log('Getting new paintings for the day')
