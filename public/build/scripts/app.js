@@ -10,10 +10,12 @@ angular.module('momentumArtApp', [])
 
         getBackgroundImage.getImage().then(function successCallbackFn(data) {
             var randomNumber = getRandomNumber(0, 5)
-            $scope.backgroundImageUrl = data[randomNumber].url;
-            $scope.paintingName = data[randomNumber].title;
-            $scope.artistName = data[randomNumber].artist;
-            $scope.yearPainted = data[randomNumber].date;
+            $scope.backgroundImageUrl = data._links.image.href.replace('{image_version}', 'large_rectangle')
+            console.log(data);
+            // $scope.backgroundImageUrl = data.links.image;
+            // $scope.paintingName = data[randomNumber].title;
+            // $scope.artistName = data[randomNumber].artist;
+            // $scope.yearPainted = data[randomNumber].date;
         }, function errorCallbackFn(response) {
             console.log('this is the error message', response)
         });
@@ -27,7 +29,7 @@ angular.module('momentumArtApp', [])
     var herokuURL = "https://damp-springs-37879.herokuapp.com/";
     var getBackgroundImage = {
         getImage: function() {
-            var promise = $http.get(herokuURL + user + '/paintingsToDisplay').then(function(response) {
+            var promise = $http.get('/paintingToDisplay').then(function(response) {
                 return response.data
             });
             return promise

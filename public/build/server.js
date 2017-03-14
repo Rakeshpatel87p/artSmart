@@ -14,40 +14,45 @@ app.use(express.static(__dirname));
 // app.use('/lib', express.static(__dirname + '/bower_components'));
 // app.use('/server.js', express.static(__dirname + '/server.js'));
 
-mongoose.connect('mongodb://Rakeshpatel87p:printer1@ds023644.mlab.com:23644/art_smart', function(err, database) {
-    if (err) {
-        console.log('Error connecting to database ', err)
-        process.exit(1)
-    }
-    console.log('connected!')
-    db = database
-    var server = app.listen(process.env.PORT || 8000, function() {
+// mongoose.connect('mongodb://Rakeshpatel87p:printer1@ds023644.mlab.com:23644/art_smart', function(err, database) {
+//     if (err) {
+//         console.log('Error connecting to database ', err)
+//         process.exit(1)
+//     }
+//     console.log('connected!')
+//     db = database
+//     var server = app.listen(process.env.PORT || 8000, function() {
+//         var port = server.address().port;
+//         console.log('Connected Captain. Safe journey.');
+//         console.log('App now running on port', port);
+//     });
+// });
+
+var server = app.listen(process.env.PORT || 8080, function() {
         var port = server.address().port;
         console.log('Connected Captain. Safe journey.');
         console.log('App now running on port', port);
-    });
 });
+// var userProfile = mongoose.Schema({
+//     user: { type: String },
+//     // Get this to take in more arguments - what's the best structure? One to many?
+//     artWorksOnRotation: [],
+//     // [{ type: Schema.Types.ObjectId, ref: 'PaintingAttributes', index: true }],
+//     artWorksLiked: [{ type: String }],
+//     dateRotationWasUpdate: { type: String }
+// });
+// var paintingAttributes = mongoose.Schema({
+//     image_id: { type: String },
+//     title: { type: String },
+//     date: { type: String },
+//     artist: {type: String},
+//     collecting_institution: { type: String },
+//     url: { type: String },
+//     special_notes: { type: String }
+// });
 
-var userProfile = mongoose.Schema({
-    user: { type: String },
-    // Get this to take in more arguments - what's the best structure? One to many?
-    artWorksOnRotation: [],
-    // [{ type: Schema.Types.ObjectId, ref: 'PaintingAttributes', index: true }],
-    artWorksLiked: [{ type: String }],
-    dateRotationWasUpdate: { type: String }
-});
-var paintingAttributes = mongoose.Schema({
-    image_id: { type: String },
-    title: { type: String },
-    date: { type: String },
-    artist: {type: String},
-    collecting_institution: { type: String },
-    url: { type: String },
-    special_notes: { type: String }
-});
-
-var UserProfile = mongoose.model('UserProfile', userProfile);
-var PaintingAttributes = mongoose.model('PaintingAttributes', paintingAttributes)
+// var UserProfile = mongoose.model('UserProfile', userProfile);
+// var PaintingAttributes = mongoose.model('PaintingAttributes', paintingAttributes)
 
 // Why doesn't this work?
 // app.get('/', function(req, response) {
@@ -118,6 +123,21 @@ app.get('/artworks/:id', function(req, response) {
         .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
         .end(function(res) {
             unirest.get('https://api.artsy.net/api/artworks/' + id)
+                .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
+                .end(function(res_) {
+                    console.log(res_.body)
+                    response.json(res_.body)
+                })
+        });
+});
+
+app.get('/paintingToDisplay', function(req, response) {
+    unirest.post('https://api.artsy.net/api/tokens/xapp_token')
+        .headers({ 'Accept': 'application/json' })
+        .send({ "client_id": "cd7051715d376f899232", "client_secret": "de9378d3d12c2cbfb24221e8b96d212c" })
+        .end(function(res) {
+            // What additional artworks will I provide?
+            unirest.get('https://api.artsy.net/api/artworks?sample=1')
                 .headers({ 'Accept': 'application/json', 'X-XAPP-Token': res.body.token })
                 .end(function(res_) {
                     console.log(res_.body)
