@@ -13,7 +13,7 @@ angular.module('momentumArtApp', [])
             $scope.backgroundImageUrl = data._links.image.href.replace('{image_version}', 'large_rectangle')
             console.log(data);
             // $scope.backgroundImageUrl = data.links.image;
-            // $scope.paintingName = data[randomNumber].title;
+            $scope.paintingName = data.title;
             // $scope.artistName = data[randomNumber].artist;
             // $scope.yearPainted = data[randomNumber].date;
         }, function errorCallbackFn(response) {
