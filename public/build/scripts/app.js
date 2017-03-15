@@ -3,7 +3,7 @@ angular.module('momentumArtApp', [])
 
         getBackgroundImage.getImage().then(function successCallbackFn(data) {
             var randomNumber = getRandomNumber(0, 5)
-            $scope.backgroundImageUrl = data._links.image.href.replace('{image_version}', 'large_rectangle')
+            $scope.backgroundImageUrl = data._links.image.href.replace('{image_version}', 'large')
             console.log(data);
             // $scope.backgroundImageUrl = data.links.image;
             $scope.paintingName = data.title;
