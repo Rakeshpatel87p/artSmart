@@ -8,10 +8,10 @@ angular.module('momentumArtApp', [])
             // $scope.backgroundImageUrl = data.links.image;
             $scope.paintingName = data.title;
             $scope.paintingBlurb = false;
-            paintingBlurbTimer();
+            // $timeout(function() { $scope.paintingBlurb = true }, 3000)
+            // paintingBlurbTimer();
             function paintingBlurbTimer() {
-                $scope.paintingBlurb = true;
-                $timeout(function() { $scope.paintingDetails = false }, 3000)
+                $timeout(function() { $scope.paintingBlurb = true }, 3000)
             };
             // $scope.artistName = data[randomNumber].artist;
             // $scope.yearPainted = data[randomNumber].date;

@@ -14,8 +14,8 @@
         <div class="paintingImage">
             <img src={{backgroundImageUrl}} alt="">
         </div>
-        <div ng-show="paintingBlurb" class="paintingDetails fadein fadeout" ng-show="paintingDetails">
-            <p class="paintingName">{{paintingName}}</p>
+        <div class="paintingDetails fadein fadeout">
+            <p class="paintingName" ng-show="paintingBlurb">{{paintingName}}</p>
         </div>
     </div>
     <script type="text/javascript" src="lib/angular/angular.js"></script>
