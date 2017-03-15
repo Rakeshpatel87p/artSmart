@@ -29,7 +29,7 @@ angular.module('momentumArtApp', [])
     var herokuURL = "https://damp-springs-37879.herokuapp.com";
     var getBackgroundImage = {
         getImage: function() {
-            var promise = $http.get(herokuURL + '/paintingToDisplay').then(function(response) {
+            var promise = $http.get('/paintingToDisplay').then(function(response) {
                 return response.data
             });
             return promise

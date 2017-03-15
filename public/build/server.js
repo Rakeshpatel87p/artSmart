@@ -130,7 +130,7 @@ app.get('/artworks/:id', function(req, response) {
                 })
         });
 });
-
+// gets random painting and attributes from artsy.net
 app.get('/paintingToDisplay', function(req, response) {
     unirest.post('https://api.artsy.net/api/tokens/xapp_token')
         .headers({ 'Accept': 'application/json' })
