@@ -1,12 +1,5 @@
 angular.module('momentumArtApp', [])
     .controller('backgroundImage', ['$scope', '$timeout', '$interval', 'getBackgroundImage', function($scope, $timeout, $interval, getBackgroundImage) {
-        $scope.paintingBlurb = false;
-        paintingBlurbTimer();
-
-        function paintingBlurbTimer() {
-            $scope.paintingBlurb = true;
-            $timeout(function() { $scope.paintingBlurb = false }, 3000)
-        };
 
         getBackgroundImage.getImage().then(function successCallbackFn(data) {
             var randomNumber = getRandomNumber(0, 5)
@@ -14,6 +7,12 @@ angular.module('momentumArtApp', [])
             console.log(data);
             // $scope.backgroundImageUrl = data.links.image;
             $scope.paintingName = data.title;
+            $scope.paintingBlurb = false;
+            paintingBlurbTimer();
+            function paintingBlurbTimer() {
+                $scope.paintingBlurb = true;
+                $timeout(function() { $scope.paintingDetails = false }, 3000)
+            };
             // $scope.artistName = data[randomNumber].artist;
             // $scope.yearPainted = data[randomNumber].date;
         }, function errorCallbackFn(response) {

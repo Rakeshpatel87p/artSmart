@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" ng-controller="backgroundImage" ng-app="momentumArtApp" ng-csp>
+
 <head>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300" rel="stylesheet">
     <link rel="stylesheet" href="style/main.css">
     <title>art.Smart</title>
 </head>
+
 <body>
     <!-- class="paintingImage" ng-style="{'background-image': 'url(' + backgroundImageUrl + ')'}" -->
     <div>
         <div class="paintingImage">
             <img src={{backgroundImageUrl}} alt="">
         </div>
-        <div ng-show="paintingBlurb" class="paintingDetails fadein fadeout">
+        <div ng-show="paintingBlurb" class="paintingDetails fadein fadeout" ng-show="paintingDetails">
             <p class="paintingName">{{paintingName}}</p>
         </div>
     </div>
     <script type="text/javascript" src="lib/angular/angular.js"></script>
-<!--         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script> -->
+    <!--         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script> -->
     <script type="text/javascript" src="scripts/app.js"></script>
-<!--     <script type="text/javascript" src="server.js"></script>
- -->    <!-- <script src="scripts/bundle.js"></script> -->
+    <!--     <script type="text/javascript" src="server.js"></script>
+ -->
+    <!-- <script src="scripts/bundle.js"></script> -->
 </body>
+
 </html>
