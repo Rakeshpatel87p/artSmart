@@ -10,25 +10,6 @@ html {
     transition: 1000ms ease-in-out all;
 }
 
-/*.fadein.ng-hide-remove,
-.fadeout.ng-hide-add {
-    -webkit-transition: 1000ms ease-in-out all;
-    -moz-transition: 1000ms ease-in-out all;
-    -o-transition: 1000ms ease-in-out all;
-    transition: 1000ms ease-in-out all;
-    display: block !important;
-}
-
-.fadein.ng-hide-remove,
-.fadeout.ng-hide-add.ng-hide-add-active {
-    opacity: 0;
-}*/
-
-/*.fadeout.ng-hide-add,
-.fadein.ng-hide-remove.ng-hide-remove-active {
-    opacity: 1;
-}*/
-
 .paintingImage {
     margin-left: 7em;
     margin-top: 1em;
