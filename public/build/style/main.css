@@ -11,7 +11,26 @@ html {
 .paintingImage img {
     width:91%;
     height: 666px;
-    -webkit-animation: fadein 2s;
+    /*-webkit-animation: opacity 2s linear;*/
+     animation: ease-in 2s;
+     animation-delay: 2s
+}
+
+.paintingImage.loading img {
+    opacity: 1;
+}
+
+.element {
+ 
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .paintingDetails {
