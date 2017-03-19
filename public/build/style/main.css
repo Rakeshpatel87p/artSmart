@@ -12,8 +12,8 @@ html {
     width:91%;
     height: 666px;
     /*-webkit-animation: opacity 2s linear;*/
-     animation: ease-in 2s;
-     animation-delay: 2s
+     animation: pulse 2s;
+     animation-delay: 4s;
 }
 
 .paintingImage.loading img {
