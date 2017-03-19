@@ -23,7 +23,6 @@ html {
 .paintingDetails {
     position: absolute;
     top:50%;
-    /*width:30%;*/
     margin-left:43%;
     text-align: center;
     color:white;

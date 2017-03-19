@@ -16,7 +16,10 @@ angular.module('momentumArtApp', [])
             // $scope.artistName = data[randomNumber].artist;
             // $scope.yearPainted = data[randomNumber].date;
         }, function errorCallbackFn(response) {
-            console.log('this is the error message', response)
+            console.log('this is the error message', response);
+            $scope.backgroundImageUrl = './artSmart.png';
+            $scope.paintingName = 'RockyP';        
+
         });
 
     }])
