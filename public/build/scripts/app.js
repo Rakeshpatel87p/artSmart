@@ -1,8 +1,11 @@
+// Delay image appearance on load
+// create container for image information
+// scale images accordingly
+
 angular.module('momentumArtApp', [])
     .controller('backgroundImage', ['$scope', '$timeout', '$interval', 'getBackgroundImage', function($scope, $timeout, $interval, getBackgroundImage) {
 
         getBackgroundImage.getImage().then(function successCallbackFn(data) {
-            var randomNumber = getRandomNumber(0, 5)
             $scope.backgroundImageUrl = data._links.image.href.replace('{image_version}', 'normalized')
             console.log(data);
             // $scope.backgroundImageUrl = data.links.image;
@@ -53,19 +56,29 @@ angular.module('momentumArtApp', [])
 //     };
 // });
 
-.directive('fadeIn', function($timeout) {
-    return {
-        restrict: 'A',
-        link: function($scope, $element, attrs) {
-            $element.addClass("ng-hide-remove");
-            $element.on('load', function() {
-                $timeout($element.addClass("ng-hide-add"), 2000); //Adding timeout
-            });
-        }
-    }
+// .directive('fadeIn', function($timeout) {
+//     return {
+//         restrict: 'A',
+//         link: function($scope, $element, attrs) {
+//             $element.addClass("ng-hide-remove");
+//             $element.on('load', function() {
+//                 $timeout($element.addClass("ng-hide-add"), 2000); //Adding timeout
+//             });
+//         }
+//     }
+// });
+
+.directive('backImg', function(){
+    return function(scope, element, attrs){
+        var url = attrs.backImg;
+        element.css({
+            'background-image': 'url(' + url +')',
+            'background-size' : 'cover'
+        });
+    };
 });
 
 
-var getRandomNumber = function(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
+// var getRandomNumber = function(min, max) {
+//     return Math.floor(Math.random() * (max - min) + min);
+// }

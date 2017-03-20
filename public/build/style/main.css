@@ -11,6 +11,7 @@ html {
 .paintingImage img {
     width:91%;
     height: 666px;
+    display:none;
     /*-webkit-animation: opacity 2s linear;*/
      /*animation: pulse 2s;*/
      /*animation-delay: 4s;*/
