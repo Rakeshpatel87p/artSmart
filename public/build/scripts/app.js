@@ -59,7 +59,7 @@ angular.module('momentumArtApp', [])
         link: function($scope, $element, attrs) {
             $element.addClass("ng-hide-remove");
             $element.on('load', function() {
-                $timeout($element.addClass("ng-hide-add"), 1000); //Adding timeout
+                $timeout($element.addClass("ng-hide-add"), 2000); //Adding timeout
             });
         }
     }
