@@ -18,7 +18,7 @@ angular.module('momentumArtApp', [])
         }, function errorCallbackFn(response) {
             console.log('this is the error message', response);
             $scope.backgroundImageUrl = './artSmart.png';
-            $scope.paintingName = 'RockyP';        
+            $scope.paintingName = 'RockyP';
 
         });
 
@@ -39,7 +39,32 @@ angular.module('momentumArtApp', [])
     }
     return getBackgroundImage
 
-}]);
+}])
+
+// .directive('fadeIn', function($timeout){
+//     return {
+//         restrict: 'A',
+//         link: function($scope, $element, attrs){
+//             $element.addClass("ng-hide-remove");
+//             $element.on('load', function() {
+//                 $element.addClass("ng-hide-add");
+//             });
+//         }
+//     };
+// });
+
+.directive('fadeIn', function($timeout) {
+    return {
+        restrict: 'A',
+        link: function($scope, $element, attrs) {
+            $element.addClass("ng-hide-remove");
+            $element.on('load', function() {
+                $timeout($element.addClass("ng-hide-add"), 1000); //Adding timeout
+            });
+        }
+    }
+});
+
 
 var getRandomNumber = function(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
