@@ -42,7 +42,7 @@ angular.module('momentumArtApp', [])
     }
     return getBackgroundImage
 
-}])
+}]);
 
 // .directive('fadeIn', function($timeout){
 //     return {
@@ -68,15 +68,15 @@ angular.module('momentumArtApp', [])
 //     }
 // });
 
-.directive('backImg', function(){
-    return function(scope, element, attrs){
-        var url = attrs.backImg;
-        element.css({
-            'background-image': 'url(' + url +')',
-            'background-size' : 'cover'
-        });
-    };
-});
+// .directive('backImg', function(){
+//     return function(scope, element, attrs){
+//         var url = attrs.backImg;
+//         element.css({
+//             'background-image': 'url(' + url +')',
+//             'background-size' : 'cover'
+//         });
+//     };
+// });
 
 
 // var getRandomNumber = function(min, max) {
